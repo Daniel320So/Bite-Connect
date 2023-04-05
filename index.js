@@ -12,12 +12,16 @@ app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", async (request, response) => {
-  let restaurants = await api.searchRestaurantsByTypeAndLocation("", "Toronto");
+  let restaurants = await api.searchRestaurantsByTypeAndLocation("", "Toronto, ON");
   restaurants = restaurants.slice(0, 5);
   response.render("index", { title: "Home", restaurants });
 });
 
-app.get("/search/:", async (request, response) => {
+app.get("/search", async (request, response) => {
+  let restaurants = await api.searchRestaurantsByTypeAndLocation(request.query.type, request.query.location);
+  restaurants = restaurants.slice(0, 10);
+  console.log("")
+  response.render("searchResult", { title: `${request.query.type} in ${request.query.location}`, restaurants });
 });
 
 //server listening

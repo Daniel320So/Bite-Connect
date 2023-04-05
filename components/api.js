@@ -25,12 +25,13 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
         // if has the same result in the top 30 results
         let y = yelpResult.find( y => y.name == g.name);
         if (y) {
+            let price = g.price? y.price? (g.price + y.price)/2 : g.price : y.price //check whether there is a price
             results.push( new RestaurantBrief(
                 g.name,
                 g.image_url,
                 (g.rating + y.rating)/2,
                 g.review_count + y.review_count,
-                (g.price + y.price)/2
+                price
             ))
             // Remove from yelpResults
             yelpResult = yelpResult.filter( y => y.name !== g.name);

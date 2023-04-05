@@ -2,17 +2,20 @@ extends layout
 
 block main-content
   div#search-bar
-    h1 Search Result for "" in ""
+    h1 Search Result for #{title}
     form(action="/search", method="GET")
       input#search-type(type="text", name="type", placeholder="Search for Restaurants")
       input#search-location(type="text", name="location", placeholder="Location")
       input#search-button(type="submit")
   div#search-result 
     each res in restaurants 
-      div.search-result-restaurant
-        img(src="", alt="")
+      - let imagePath = "images/Default.png";
+      - let altTest = "No Image";
+      - if (res.img) imagePath = res.img;
+      - if (res.img) altTest = `Food in ${res.name}`;
+      a.search-result-restaurant(href="/")
+        img(src=imagePath, alt=altTest)
         div.result-container 
-          h2 Restaurant Name 
-          p Rating:
-          p Reviews:
-          p Price:
+          h2 #{res.name}
+          p Rating: #{res.rating}
+          p Reviews: #{res.numberOfReview}
