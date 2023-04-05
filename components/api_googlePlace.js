@@ -33,7 +33,7 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
             return new GooglePlaceRestaurantResult(
                 restaurant.place_id,
                 restaurant.name,
-                "",
+                restaurant.photos? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${restaurant.photos[0].photo_reference}&key=${API_KEY}`: undefined,
                 restaurant.user_ratings_total,
                 restaurant.rating,
                 restaurant.price_level,
@@ -41,7 +41,7 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
             )
         });
     })
-
+    
         //   {
         //     business_status: 'OPERATIONAL',
         //     formatted_address: '5 Northtown Way, North York, ON M2N 7A1, Canada',

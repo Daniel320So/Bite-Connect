@@ -11,19 +11,11 @@ block main-content
   div#featured-list 
     h2 Featured List
     each res in restaurants 
-      div.featured-restaurant
-        img(src="", alt="")
-        h3 Restaurant 1
-  //- each lib in libraries
-  //-   - let libId = lib.id;
-  //-   - let libName = lib.querySelector("name").textContent;
-  //-   - let libAddress = lib.querySelector("address").textContent;
-  //-   - let libPhoneNumber = lib.querySelector("phoneNumber").textContent;
-  //-   - let libDescription = lib.querySelector("description").textContent;
-  //-   div 
-  //-     h2 
-  //-       a(href=`./library/${libId}`) #{libName}
-  //-     p #{libAddress}
-  //-     p #{libPhoneNumber}
-  //-     p #{libDescription}
+      - let imagePath = "images/Default.png";
+      - let altTest = "No Image";
+      - if (res.img) imagePath = res.img;
+      - if (res.img) altTest = `Food in ${res.name}`;
+      a.featured-restaurant(href="/")
+        img(src=imagePath, alt=altTest)
+        h3 #{res.name}
 
