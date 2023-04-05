@@ -1,0 +1,18 @@
+extends layout
+
+block main-content
+  div#search-bar
+    h1 Search Result for "" in ""
+    form(action="/search", method="GET")
+      input#search-type(type="text", name="type", placeholder="Search for Restaurants")
+      input#search-location(type="text", name="location", placeholder="Location")
+      input#search-button(type="submit")
+  div#search-result 
+    each res in restaurants 
+      div.search-result-restaurant
+        img(src="", alt="")
+        div.result-container 
+          h2 Restaurant Name 
+          p Rating:
+          p Reviews:
+          p Price:

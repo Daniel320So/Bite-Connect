@@ -1,0 +1,29 @@
+extends layout
+
+block main-content
+  div#hero-section
+    h1#hero-text Hero Text!
+    div#search-bar
+    form(action="/search", method="GET")
+      input#search-type(type="text", name="type", placeholder="Search for Restaurants")
+      input#search-location(type="text", name="location", placeholder="Location")
+      input#search-button(type="submit")
+  div#featured-list 
+    h2 Featured List
+    each res in restaurants 
+      div.featured-restaurant
+        img(src="", alt="")
+        h3 Restaurant 1
+  //- each lib in libraries
+  //-   - let libId = lib.id;
+  //-   - let libName = lib.querySelector("name").textContent;
+  //-   - let libAddress = lib.querySelector("address").textContent;
+  //-   - let libPhoneNumber = lib.querySelector("phoneNumber").textContent;
+  //-   - let libDescription = lib.querySelector("description").textContent;
+  //-   div 
+  //-     h2 
+  //-       a(href=`./library/${libId}`) #{libName}
+  //-     p #{libAddress}
+  //-     p #{libPhoneNumber}
+  //-     p #{libDescription}
+

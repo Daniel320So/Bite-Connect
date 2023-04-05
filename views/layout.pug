@@ -1,0 +1,17 @@
+block variables
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width")
+    link(rel="stylesheet", type="text/css", href="site.css")
+    title #{title} | FoodMate
+  body
+    header#header
+      div.header-content
+        h2#site-name
+          a(href="/") FoodMate
+    main#main
+      block main-content
+    footer#footer
+      div &copy; Copyright HoKit So, 2023.

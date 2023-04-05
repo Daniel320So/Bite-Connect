@@ -1,0 +1,21 @@
+{
+  "name": "testxml",
+  "version": "1.0.0",
+  "description": "JLab5-HoKitSo",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./index.js",
+    "ui": "browser-sync start --config bs-config.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsdom": "^21.1.0",
+    "pug": "^3.0.2",
+    "yelp-fusion": "^3.0.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.27.11",
+    "nodemon": "^2.0.20"
+  }
+}
