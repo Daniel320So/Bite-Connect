@@ -15,7 +15,10 @@ block main-content
       - let altTest = "No Image";
       - if (res.img) imagePath = res.img;
       - if (res.img) altTest = `Food in ${res.name}`;
-      a.featured-restaurant(href="/")
+      a.featured-restaurant(href=`/restaurant/googleId/${res.googleId}/yelpId/${res.yelpId}`)
         img(src=imagePath, alt=altTest)
         h3 #{res.name}
-
+        if res.googleRating
+          p Google Rating: #{res.googleRating}
+        if res.yelpRating
+          p Yelp Rating: #{res.yelpRating}

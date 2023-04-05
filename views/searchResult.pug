@@ -15,7 +15,9 @@ block main-content
       - if (res.img) altTest = `Food in ${res.name}`;
       a.search-result-restaurant(href="/")
         img(src=imagePath, alt=altTest)
-        div.result-container 
-          h2 #{res.name}
-          p Rating: #{res.rating}
-          p Reviews: #{res.numberOfReview}
+        div#search-details
+          h3 #{res.name}
+          if res.googleRating
+            p Google Rating: #{res.googleRating} #{res.googleReview}
+          if res.yelpRating
+            p Yelp Rating: #{res.yelpRating} #{res.yelpReview}

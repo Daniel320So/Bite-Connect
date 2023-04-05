@@ -1,0 +1,27 @@
+extends layout
+
+block main-content
+  #restaurant
+    h1 #{restaurant.details.name}
+    #res-info 
+      - let imagePath = "images/Default.png";
+      - let altTest = "No Image";
+      - if (restaurant.details.img) imagePath = restaurant.details.img;
+      - if (restaurant.details.img) altTest = `Food in ${restaurant.details.name}`;
+      img(src=imagePath, alt=altTest)
+      div#res-detail
+        if restaurant.details.googleRating
+          p Google Rating: #{restaurant.details.googleRating} #{restaurant.details.googleReview}
+        if restaurant.details.yelpRating
+            p Yelp Rating: #{restaurant.details.yelpRating} #{restaurant.details.yelpReview}
+    #res-review 
+      if restaurant.googleReviews
+        each review in restaurant.googleReviews 
+          h3 #{review.userName}
+          p #{review.rating}
+          p #{review.text}
+      if restaurant.yelpReviews
+        each review in restaurant.yelpReviews 
+          h3 #{review.userName}
+          p #{review.rating}
+          p #{review.text}

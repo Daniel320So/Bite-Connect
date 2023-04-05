@@ -20,8 +20,14 @@ app.get("/", async (request, response) => {
 app.get("/search", async (request, response) => {
   let restaurants = await api.searchRestaurantsByTypeAndLocation(request.query.type, request.query.location);
   restaurants = restaurants.slice(0, 10);
-  console.log("")
   response.render("searchResult", { title: `${request.query.type} in ${request.query.location}`, restaurants });
+});
+
+app.get("/restaurant/googleId/:googleId/yelpId/:yelpId", async (request, response) => {
+  console.log("params", request.params);
+  let restaurant = await api.getRestaurantDetailsAndReviewById(request.params.googleId, request.params.yelpId);
+  console.log("restaurants", restaurant)
+  response.render("restaurant", { title: `${restaurant.details.name}`, restaurant });
 });
 
 //server listening

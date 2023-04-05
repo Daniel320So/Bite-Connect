@@ -11,9 +11,7 @@ function GooglePlaceRestaurantResult(id, name, image_url, review_count, rating, 
     this.location = location;
 }
 
-function GoogleReview(id, url, text, rating, userName) {
-    this.id = id,
-    this.url = url,
+function GoogleReview(text, rating, userName) {
     this.text = text,
     this.rating = rating,
     this.userName = userName
@@ -23,7 +21,7 @@ function GoogleReview(id, url, text, rating, userName) {
 const searchRestaurantsByTypeAndLocation = async(type, location) => {
     let results;
     const url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
-    let query;
+    let query = "";
     if (type && type !== "") query = `${type}%20`;
     query = query + `restaurants%20in%20${location}&key=${API_KEY}`;
     await fetch(url + query)
@@ -63,19 +61,32 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
     return results;
 }
 
-const getReviewsByPlaceId = async (id) => {
-    let results;
+const getRestaurantDetailsByPlaceId = async (id) => {
+    let results = {};
     await fetch(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${id}&key=${API_KEY}`)
     .then(async(response) => {
         const data = await response.json();
-        results = data.result.reviews;
-        console.log("data", data.result.reviews)
+        results.details = new GooglePlaceRestaurantResult(
+            data.result.place_id,
+            data.result.name,
+            data.result.photos? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${data.result.photos[0].photo_reference}&key=${API_KEY}`: undefined,
+            data.result.user_ratings_total,
+            data.result.rating,
+            data.result.price_level,
+            data.result.formatted_address
+        )
+        results.reviews = data.result.reviews.map( r => {
+            return new GoogleReview(
+                r.text,
+                r.rating,
+                r.author_name
+            );
+        });
     })
     return results;
-    
 }
 
 module.exports = {
     searchRestaurantsByTypeAndLocation,
-    getReviewsByPlaceId
+    getRestaurantDetailsByPlaceId
 };

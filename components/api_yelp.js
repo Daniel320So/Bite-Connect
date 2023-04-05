@@ -29,7 +29,7 @@ function YelpReview(id, url, text, rating, userName) {
 //Returns 30 restaurants on the searched location
 const searchRestaurantsByTypeAndLocation = async(type, location) => {
     let results;
-    let term;
+    let term = "";
     if (type && type !== "") term = `${type} `;
     term = term + "Restaurants";
     await client.search({term, location}).then(response => {
@@ -49,6 +49,8 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
     }).catch(e => {
         console.log(e);
     });
+
+    console.log(term, location, results)
 
 
         // {
@@ -99,7 +101,36 @@ const getReviewsByRestaurantId = async(id) => {
     return results;
 }
 
+const getDetailsByRestaurantId = async(id) => {
+    let results;
+    await client.business(id).then(response => {
+        const data = response.jsonBody;
+        results = new YelpRestaurantResult(
+            data.id,
+            data.name, 
+            data.image_url, 
+            data.review_count, 
+            data.rating, 
+            data.price ? data.price.length: undefined,
+            data.phone, 
+            data.location.display_address.toString(),
+            data.categories
+        )
+    }).catch(e => {
+        console.log(e);
+    });
+    return results;
+}
+
+const getRestaurantDetailsByPlaceId = async(id) => {
+    let results = {};
+    console.log("id", id)
+    results.reviews = await getReviewsByRestaurantId(id);
+    results.details = await getDetailsByRestaurantId(id);
+    return results;
+}
+
 module.exports = {
     searchRestaurantsByTypeAndLocation,
-    getReviewsByRestaurantId
+    getRestaurantDetailsByPlaceId
 };
