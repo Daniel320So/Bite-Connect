@@ -50,36 +50,6 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
         console.log(e);
     });
 
-    console.log(term, location, results)
-
-
-        // {
-        //   id: 'MTHgT0rSQ56t-aWCJcnjVw',
-        //   alias: 'yokai-izakaya-vaughan',
-        //   name: 'Yokai Izakaya',
-        //   image_url: 'https://s3-media2.fl.yelpcdn.com/bphoto/aJ5WDpKACZBVJvXYEYDxog/o.jpg',
-        //   is_closed: false,
-        //   url: 'https://www.yelp.com/biz/yokai-izakaya-vaughan?adjust_creative=TtHLb_1RvVt9MZf4qZooyw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=TtHLb_1RvVt9MZf4qZooyw',       
-        //   review_count: 37,
-        //   categories: [ [Object], [Object], [Object] ],
-        //   rating: 4.5,
-        //   coordinates: { latitude: 43.82898, longitude: -79.53722 },
-        //   transactions: [],
-        //   location: {
-        //     address1: '3175 Rutherford Road',
-        //     address2: 'Unit 28',
-        //     address3: '',
-        //     city: 'Vaughan',
-        //     zip_code: 'L4K 5Y6',
-        //     country: 'CA',
-        //     state: 'ON',
-        //     display_address: [Array]
-        //   },
-        //   phone: '+16479302623',
-        //   display_phone: '+1 647-930-2623',
-        //   distance: 11268.731564023185
-        // }
-
     return results;
 };
 
@@ -124,7 +94,6 @@ const getDetailsByRestaurantId = async(id) => {
 
 const getRestaurantDetailsByPlaceId = async(id) => {
     let results = {};
-    console.log("id", id)
     results.reviews = await getReviewsByRestaurantId(id);
     results.details = await getDetailsByRestaurantId(id);
     return results;

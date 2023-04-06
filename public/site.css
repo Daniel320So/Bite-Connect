@@ -1,6 +1,137 @@
 /* #General */
 
-/* Header */
-#header {
-    background-color: aqua;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #0077cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    padding-left: 2%;
+    height: 70px;
+    width: 100%;
+    z-index: 1;
+}
+
+#main {
+    margin-top: 70px;
+}
+
+/* #Hero Section */
+
+#hero-section {
+    height: 500px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#hero-background {
+    opacity: 0.75;
+    background-image: url("./images/hero-image.jpg");
+    /* Image from https://www.pinterest.com/pin/119908408819273701/*/
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 500px;
+    z-index: -1;
+}
+
+#hero-text {
+    width: 100%;
+    text-align: center;
+    color: #0b132b;
+    font-size: 5em;
+    margin-top: 0;
+}
+
+#search-bar {
+    width: 80%;
+    margin-bottom: 50px;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2px;
+}
+
+#search-type,
+#search-location,
+#search-button {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1.25em;
+}
+
+#search-type {
+    width: 55%;
+}
+
+#search-location {
+    width: 25%;
+}
+
+#search-button {
+    background-color: #0077cc;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    width: 10%;
+}
+
+/* Featured List Styles */
+
+#featured-list {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.featured-restaurant {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-flow: column nowrap;
+    margin-bottom: 10px;
+    width: 20%;
+}
+
+.featured-restaurant a {
+    display: block;
+    color: black;
+}
+
+.featured-restaurant:hover {
+    box-shadow: 0 1em 2em rgba(0, 0, 0, 0.15);
+}
+
+.featured-restaurant img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.featured-restaurant h3 {
+    font-size: 1.5em;
+    margin: 1em;
+}
+
+.featured-restaurant p {
+    font-size: 1.2em;
+    margin: 1em;
 }

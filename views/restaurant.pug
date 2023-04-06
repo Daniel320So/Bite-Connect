@@ -4,7 +4,7 @@ block main-content
   #restaurant
     h1 #{restaurant.details.name}
     #res-info 
-      - let imagePath = "images/Default.png";
+      - let imagePath = "/images/Default.png";
       - let altTest = "No Image";
       - if (restaurant.details.img) imagePath = restaurant.details.img;
       - if (restaurant.details.img) altTest = `Food in ${restaurant.details.name}`;

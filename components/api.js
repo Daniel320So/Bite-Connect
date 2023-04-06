@@ -66,8 +66,13 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
         ))
     })
 
-    results = results.sort((a, b) => b.rating - a.rating);
-    console.log("results", results)
+    // Sort by the ratings
+    results = results.sort((a, b) => {
+        let aRating = Math.max(a.googleRating, a.yelpRating);
+        let bRating = Math.max(b.googleRating, b.yelpRating);
+        return bRating - aRating;
+    });
+
     return results;
 }
 
@@ -88,7 +93,6 @@ const getRestaurantDetailsAndReviewById = async(googleId, yelpId) => {
 
     // Get place details and reviews on Yelp
     if (yelpId && yelpId !== "No_ID") {
-        console.log(yelpId, typeof(yelpId));
         yelpResult = await yelp.getRestaurantDetailsByPlaceId(yelpId); 
         results.yelpReviews = yelpResult.reviews;
     }
@@ -105,7 +109,6 @@ const getRestaurantDetailsAndReviewById = async(googleId, yelpId) => {
         yelpResult? yelpResult.details.review_count: null
     );
 
-    console.log(results)
     return results;
 }
 

@@ -9,7 +9,7 @@ block main-content
       input#search-button(type="submit")
   div#search-result 
     each res in restaurants 
-      - let imagePath = "images/Default.png";
+      - let imagePath = "/images/Default.png";
       - let altTest = "No Image";
       - if (res.img) imagePath = res.img;
       - if (res.img) altTest = `Food in ${res.name}`;

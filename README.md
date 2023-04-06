@@ -1,2 +1,2 @@
-# FoodMate
+# Food Mate
  

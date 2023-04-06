@@ -24,9 +24,7 @@ app.get("/search", async (request, response) => {
 });
 
 app.get("/restaurant/googleId/:googleId/yelpId/:yelpId", async (request, response) => {
-  console.log("params", request.params);
   let restaurant = await api.getRestaurantDetailsAndReviewById(request.params.googleId, request.params.yelpId);
-  console.log("restaurants", restaurant)
   response.render("restaurant", { title: `${restaurant.details.name}`, restaurant });
 });
 
