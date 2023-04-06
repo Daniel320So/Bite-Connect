@@ -10,16 +10,16 @@ block main-content
       input#search-button(type="submit" value="Search")
   #featured-list 
     h2 Featured Restaurants in Toronto
-    each res in restaurants 
-      - let imagePath = "/images/Default.png";
-      - let altTest = "No Image";
-      - if (res.img) imagePath = res.img;
-      - if (res.img) altTest = `Food in ${res.name}`;
-      a(href=`/restaurant/googleId/${res.googleId}/yelpId/${res.yelpId}`)
-        .featured-restaurant
-          img(src=imagePath, alt=altTest)
-          h3 #{res.name}
-          if res.googleRating
-            p Google Rating: #{res.googleRating}
-          if res.yelpRating
-            p Yelp Rating: #{res.yelpRating}
+    #restaurants-container
+      each res in restaurants 
+        - let imagePath = "/images/Default.png";
+        - let altTest = "No Image";
+        - if (res.img) imagePath = res.img;
+        - if (res.img) altTest = `Food in ${res.name}`;
+        a.featured-restaurant(href=`/restaurant/googleId/${res.googleId}/yelpId/${res.yelpId}`)
+            img(src=imagePath, alt=altTest)
+            h3 #{res.name}
+            if res.googleRating
+              p Google Rating: #{res.googleRating}
+            if res.yelpRating
+              p Yelp Rating: #{res.yelpRating}
