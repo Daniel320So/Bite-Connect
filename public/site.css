@@ -93,7 +93,7 @@ header {
     width: 10%;
 }
 
-/* Featured List Styles */
+/* Featured List */
 
 #featured-list {
     display: flex;
@@ -137,8 +137,42 @@ header {
     max-height: 100%;
 }
 
-.featured-restaurant h3, p {
+.featured-restaurant h3, .featured-restaurant p {
     color: black;
     margin: 0;
     text-align: center;
+}
+
+/* Search Result */
+
+#search-result-wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    margin: 0 0 0 2%;
+}
+
+#search-result {
+    margin: 0 0 0 2%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.search-result-restaurant {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
+    width: 45%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    margin: 0 2% 10px 0;
+}
+
+.search-image {
+    width: 40%;
+    max-width: 40%;
+    height: 200px;
+    max-height: 200px;
 }
