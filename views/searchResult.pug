@@ -13,9 +13,9 @@ block main-content
       - let altTest = "No Image";
       - if (res.img) imagePath = res.img;
       - if (res.img) altTest = `Food in ${res.name}`;
-      a.search-result-restaurant(href="/")
+      a.search-result-restaurant(href=`/restaurant/googleId/${res.googleId}/yelpId/${res.yelpId}`)
         img.search-image(src=imagePath, alt=altTest)
-        #search-details
+        .search-details
           h3 #{res.name}
           if res.googleRating
             p Google Rating: #{res.googleRating} #{res.googleReview}

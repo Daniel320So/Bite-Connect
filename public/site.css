@@ -166,7 +166,6 @@ header {
     width: 45%;
     display: flex;
     flex-flow: row wrap;
-    align-items: center;
     margin: 0 2% 10px 0;
 }
 
@@ -175,4 +174,41 @@ header {
     max-width: 40%;
     height: 200px;
     max-height: 200px;
+}
+
+.search-result-restaurant h3, .search-result-restaurant p {
+    margin-left: 10%;
+    color: black;
+}
+
+/* Restaurant */
+
+#restaurant {
+    margin-left: 2%;
+}
+
+#restaurant h1 {
+    padding-top: 10px;
+}
+
+#res-info {
+    display: flex;
+    flex-flow: row wrap; 
+    gap: 5%;
+}
+
+#res-detail {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+#res-review > * {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
+}
+
+#res-review h3, #res-review p {
+    margin-left: 2%;
 }
