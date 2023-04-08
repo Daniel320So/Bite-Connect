@@ -5,26 +5,27 @@ const client = yelp.client(apiKey);
 
 //Object Constructor
 
-function YelpRestaurantResult(id, name, image_url, review_count, rating, price, phone, location, categories = []) {
-    this.id = id;
-    this.name = name;
-    this.image_url = image_url;
-    this.review_count = review_count;
-    this.rating = rating;
-    this.price = price;
-    this.phone = phone;
-    this.location = location;
-    this.categories = [];
-    categories.forEach( c => this.categories.push(c.title));
-}
+function YelpRestaurantResult(id, name, image_url, review_count, rating, price, phone, location) {
+    this.id = id,
+    this.name = name,
+    this.image_url = image_url,
+    this.review_count = review_count,
+    this.rating = rating,
+    this.price = price,
+    this.phone = phone,
+    this.location = location
+};
 
-function YelpReview(id, url, text, rating, userName) {
+function YelpReview(id, url, text, rating, userName, profileImage, time) {
     this.id = id,
     this.url = url,
     this.text = text,
     this.rating = rating,
-    this.userName = userName
-}
+    this.userName = userName,
+    this.profileImage = profileImage,
+    this.time = time,
+    this.type = "YELP"
+};
 
 //Returns 30 restaurants on the searched location
 const searchRestaurantsByTypeAndLocation = async(type, location) => {
@@ -44,7 +45,6 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
             restaurant.price ? restaurant.price.length: undefined,
             restaurant.phone, 
             restaurant.location.display_address.toString(),
-            restaurant.categories
         ))
     }).catch(e => {
         console.log(e);
@@ -63,7 +63,9 @@ const getReviewsByRestaurantId = async(id) => {
             review.url, 
             review.text, 
             review.rating, 
-            review.user.name
+            review.user.name,
+            review.user.image_url,
+            new Date(review.time_created).toLocaleString()
         ))
     }).catch(e => {
         console.log(e);
@@ -84,7 +86,6 @@ const getDetailsByRestaurantId = async(id) => {
             data.price ? data.price.length: undefined,
             data.phone, 
             data.location.display_address.toString(),
-            data.categories
         )
     }).catch(e => {
         console.log(e);

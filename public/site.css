@@ -38,6 +38,18 @@ header h2 {
     margin-top: 50px;
 }
 
+.rating {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+}
+
+.platform-icon {
+    max-width: 30px !important;
+    max-height: 30px !important;
+}
 /* #Hero Section */
 
 #hero-section {
@@ -127,6 +139,7 @@ header h2 {
     display: flex;
     flex-flow: column nowrap;
     margin-bottom: 10px;
+    padding-bottom: 10px;
     width: 17%;
 }
 
@@ -186,6 +199,12 @@ header h2 {
     margin: 0 2% 10px 0;
 }
 
+.search-result-restaurant .rating {
+    justify-content: left;
+    gap: 2%;
+    padding-left: 5%;
+}
+
 .search-image {
     width: 40%;
     max-width: 40%;
@@ -197,12 +216,12 @@ header h2 {
     width: 60%;
 }
 
-.search-result-restaurant h3, .search-result-restaurant p {
-    margin-left: 10%;
+.search-result-restaurant p {
     color: black;
 }
 
 .search-result-restaurant h3 {
+    margin-left: 5%;
     color: orange;
 }
 /* Restaurant */
@@ -239,28 +258,48 @@ header h2 {
     box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
 }
 
+#res-detail .rating {
+    justify-content: left;
+    gap: 2%;
+
+}
+
 #res-detail > * {
-    margin-left: 2%;
+    padding-left: 5%;
 }
 
 #res-review h2 {
     color: orange;
 }
 
-.google-review {
-    background-color: #ffffea;
+.google-review, .yelp-review {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
     padding: 0 2%;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 5%;
+    padding: 10px;
+}
+
+.google-review {
+    background-color: #ffffea;
 }
 
 .yelp-review {
     background-color: #ffecef;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
-    padding: 0 2%;
+}
+
+.comment-img {
+    width: 15%;
+    max-width: 15%;
+    height: 200px;
+    max-height: 200px;
+}
+
+.comment-details {
+    width: 70%;
 }
 
 

@@ -11,20 +11,36 @@ block main-content
       img.res-image(src=imagePath, alt=altTest)
       div#res-detail
         if restaurant.details.googleRating
-          p Google Rating: #{restaurant.details.googleRating} #{restaurant.details.googleReview}
+          .rating
+            img.platform-icon(src="/images/google.png", alt="Google Icon")
+            p Google Rating: #{restaurant.details.googleRating} (#{restaurant.details.googleReviews})
         if restaurant.details.yelpRating
-          p Yelp Rating: #{restaurant.details.yelpRating} #{restaurant.details.yelpReview}
+          .rating
+            img.platform-icon(src="/images/yelp.png", alt="Yelp Icon")
+            p Yelp Rating: #{restaurant.details.yelpRating} (#{restaurant.details.yelpReviews})
+        if restaurant.details.price
+          p Price Level: #{restaurant.details.price}
+        if restaurant.details.location
+          p Address: #{restaurant.details.location}
+        if restaurant.details.phone
+          p Phone Number: #{restaurant.details.phone}
     #res-review 
       h2 Reviews
-      if restaurant.googleReviews
-        each review in restaurant.googleReviews 
-          .google-review
-            h3 Google Review: #{review.userName}
+      each review in restaurant.reviews
+        - let className = "";
+        - let h3Text = "";
+        if (review.type == "GOOGLE")
+          - className = "google-review"
+          - h3Text = "Google Review: " +  review.userName;
+        else
+          - className = "yelp-review"
+          - h3Text = "Yelp Review: " +  review.userName;
+        div(class=className)
+          - let imagePath = review.profileImage;
+          - let altTest = `Profile Image of ${review.userName}`;
+          img.comment-img(src=imagePath, alt=altTest)
+          .comment-details
+            h3 #{h3Text}
             p Rating: #{review.rating}
+            p Date: #{review.time}
             p Comment: #{review.text}
-      if restaurant.yelpReviews
-        each review in restaurant.yelpReviews 
-          .yelp-review
-            h3 Yelp Review: #{review.userName}
-            p Rating: #{review.rating}
-            p Comment:#{review.text}

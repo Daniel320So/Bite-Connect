@@ -1,7 +1,7 @@
 const google = require("./api_googlePlace")
 const yelp = require("./api_yelp")
 
-function Restaurant(name, img, googleId, googleRating, googleReviews, yelpId, yelpRating, yelpReviews, location) {
+function Restaurant(name, img, googleId, googleRating, googleReviews, yelpId, yelpRating, yelpReviews, location, price, phone) {
     this.name = name,
     this.img = img,
     this.googleId = googleId,
@@ -10,7 +10,9 @@ function Restaurant(name, img, googleId, googleRating, googleReviews, yelpId, ye
     this.yelpId = yelpId,
     this.yelpRating = yelpRating,
     this.yelpReviews = yelpReviews,
-    this.location = location
+    this.location = location,
+    this.price = price,
+    this.phone = phone
 }
 
 // Search Restaurants by Type and Location => combine results from Google Place & Yelp
@@ -35,7 +37,8 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
                 y.id,
                 y.rating,
                 y.review_count,
-                g.location? g.location : y.location
+                g.location? g.location : y.location,
+                g.pirce? g.price : g.price
             ))
             // Remove from yelpResults
             yelpResult = yelpResult.filter( y => y.name !== g.name);
@@ -50,7 +53,8 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
                 "No_ID",
                 null,
                 null,
-                g.location
+                g.location,
+                g.price
             ))
         }
     })
@@ -66,11 +70,12 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
             y.id,
             y.rating,
             y.review_count,
-            y.location
+            y.location,
+            y.price
         ))
     })
 
-    // Sort by the ratings
+    // Sort by the ratings 0 compare the highest rating if have both
     results = results.sort((a, b) => {
         let aRating = Math.max(a.googleRating, a.yelpRating);
         let bRating = Math.max(b.googleRating, b.yelpRating);
@@ -101,16 +106,27 @@ const getRestaurantDetailsAndReviewById = async(googleId, yelpId) => {
         results.yelpReviews = yelpResult.reviews;
     }
 
+    // Combine Reviews
+
+    // Take the 3 latest reviews from each platform and sort the 6 reviews by time
+    let reviews = [];
+    if (results.yelpReviews) results.yelpReviews.sort( (a, b) => b.time - a.time).slice(0, 3).map( v => reviews.push(v));
+    if (results.googleReviews) results.googleReviews.sort( (a, b) => b.time - a.time).slice(0, 3).map( v => reviews.push(v));
+    results.reviews = reviews.sort( (a, b) => b.time - a.time);
+
     // Construct new Restaurant Object
     results.details = new Restaurant(
-        googleResult? googleResult.details.name : yelpResult.details.name,
-        googleResult? googleResult.details.image_url : yelpResult.details.image_url,
+        googleResult && googleResult.details.name? googleResult.details.name : yelpResult.details.name,
+        googleResult && googleResult.details.image_url? googleResult.details.image_url : yelpResult && yelpResult.details? yelpResult.details.image_url : null,
         googleResult? googleResult.details.id: "No_ID",
         googleResult? googleResult.details.rating: null,
         googleResult? googleResult.details.review_count: null,
         yelpResult? yelpResult.details.id: "No_ID",
         yelpResult? yelpResult.details.rating: null,
-        yelpResult? yelpResult.details.review_count: null
+        yelpResult? yelpResult.details.review_count: null,
+        googleResult && googleResult.details.location? googleResult.details.location : yelpResult && yelpResult.details? yelpResult.details.location : null,
+        googleResult && googleResult.details.price? googleResult.details.price : yelpResult && yelpResult.details? yelpResult.details.price : null,
+        googleResult && googleResult.details.phone? googleResult.details.phone : yelpResult && yelpResult.details? yelpResult.details.phone : null,
     );
 
     return results;

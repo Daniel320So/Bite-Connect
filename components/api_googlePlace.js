@@ -1,21 +1,25 @@
 const API_KEY = "AIzaSyDTovu7zZTCP39wLMmAcC5PKC5YH5D1sQQ";
 
 //Object Constructor
-function GooglePlaceRestaurantResult(id, name, image_url, review_count, rating, price, location) {
-    this.id = id;
-    this.name = name;
-    this.image_url = image_url;
-    this.review_count = review_count;
-    this.rating = rating;
-    this.price = price;
-    this.location = location;
-}
+function GooglePlaceRestaurantResult(id, name, image_url, review_count, rating, price, location, phone) {
+    this.id = id,
+    this.name = name,
+    this.image_url = image_url,
+    this.review_count = review_count,
+    this.rating = rating,
+    this.price = price,
+    this.location = location,
+    this.phone = phone
+};
 
-function GoogleReview(text, rating, userName) {
+function GoogleReview(text, rating, userName, profileImage, time) {
     this.text = text,
     this.rating = rating,
-    this.userName = userName
-}
+    this.userName = userName,
+    this.profileImage = profileImage,
+    this.time = time,
+    this.type = "GOOGLE"
+};
 
 //Returns 30 restaurants on the searched type and location
 const searchRestaurantsByTypeAndLocation = async(type, location) => {
@@ -35,29 +39,11 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
                 restaurant.user_ratings_total,
                 restaurant.rating,
                 restaurant.price_level,
-                restaurant.formatted_address
+                restaurant.formatted_address,
+                restaurant.formatted_phone_number
             )
         });
     })
-    
-        //   {
-        //     business_status: 'OPERATIONAL',
-        //     formatted_address: '5 Northtown Way, North York, ON M2N 7A1, Canada',
-        //     geometry: [Object],
-        //     icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png',
-        //     icon_background_color: '#FF9E67',
-        //     icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/restaurant_pinlet',
-        //     name: 'Sushi Bong',
-        //     opening_hours: [Object],
-        //     photos: [Array],
-        //     place_id: 'ChIJgwUJWG0tK4gR3V2HPKc6u8c',
-        //     plus_code: [Object],
-        //     price_level: 1,
-        //     rating: 4.3,
-        //     reference: 'ChIJgwUJWG0tK4gR3V2HPKc6u8c',
-        //     types: [Array],
-        //     user_ratings_total: 1438
-        //   }
     return results;
 }
 
@@ -73,13 +59,16 @@ const getRestaurantDetailsByPlaceId = async (id) => {
             data.result.user_ratings_total,
             data.result.rating,
             data.result.price_level,
-            data.result.formatted_address
+            data.result.formatted_address,
+            data.result.formatted_phone_number
         )
-        results.reviews = data.result.reviews.map( r => {
+        results.reviews = data.result.reviews.map( review => {
             return new GoogleReview(
-                r.text,
-                r.rating,
-                r.author_name
+                review.text,
+                review.rating,
+                review.author_name,
+                review.profile_photo_url,
+                new Date(review.time * 1000).toLocaleString() //convert unix time to date
             );
         });
     })

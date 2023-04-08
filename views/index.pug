@@ -20,6 +20,10 @@ block main-content
             img(src=imagePath, alt=altTest)
             h3 #{res.name}
             if res.googleRating
-              p Google Rating: #{res.googleRating}
+              .rating
+                img.platform-icon(src="/images/google.png", alt="Google Icon")
+                p Google Rating: #{res.googleRating} (#{res.googleReviews})
             if res.yelpRating
-              p Yelp Rating: #{res.yelpRating}
+              .rating
+                img.platform-icon(src="/images/yelp.png", alt="Yelp Icon")
+                p Yelp Rating: #{res.yelpRating} (#{res.yelpReviews})
