@@ -1,9 +1,15 @@
 /* #General */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
 body {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+}
+
+
+h1, h2, h3, h4 {
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 a {
@@ -19,6 +25,7 @@ header {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    justify-content: space-between;
     background-color: #F2F2F2;
     border-bottom: 1px solid #ddd;
     position: fixed;
@@ -33,6 +40,26 @@ header h2 {
     margin: 0;
 }
 
+.header-content {
+    width: 30%;
+}
+
+.support-platforms {
+    width: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    align-itmes: center;
+    justify-content: flex-end;
+    gap: 15px;
+    padding-right: 50px;
+}
+
+.platform {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 5px;
+}
 
 #main {
     margin-top: 50px;
