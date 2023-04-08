@@ -1,7 +1,7 @@
 {
-  "name": "testxml",
+  "name": "bite-connect",
   "version": "1.0.0",
-  "description": "JLab5-HoKitSo",
+  "description": "bite-connect",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./index.js",
