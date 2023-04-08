@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project builds a website that integrate the review from different restaurant review platforms.
+This project builds a website that gathers the reviews from different restaurant review platforms.
 
 ## Supported Platform
 
