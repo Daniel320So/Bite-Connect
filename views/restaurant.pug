@@ -8,7 +8,7 @@ block main-content
       - let altTest = "No Image";
       - if (restaurant.details.img) imagePath = restaurant.details.img;
       - if (restaurant.details.img) altTest = `Food in ${restaurant.details.name}`;
-      img(src=imagePath, alt=altTest)
+      img.res-image(src=imagePath, alt=altTest)
       div#res-detail
         if restaurant.details.googleRating
           p Google Rating: #{restaurant.details.googleRating} #{restaurant.details.googleReview}
@@ -19,12 +19,12 @@ block main-content
       if restaurant.googleReviews
         each review in restaurant.googleReviews 
           .google-review
-            h3 User: #{review.userName}
+            h3 Google Review: #{review.userName}
             p Rating: #{review.rating}
             p Comment: #{review.text}
       if restaurant.yelpReviews
         each review in restaurant.yelpReviews 
           .yelp-review
-            h3 User: #{review.userName}
+            h3 Yelp Review: #{review.userName}
             p Rating: #{review.rating}
             p Comment:#{review.text}

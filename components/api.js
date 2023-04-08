@@ -1,7 +1,7 @@
 const google = require("./api_googlePlace")
 const yelp = require("./api_yelp")
 
-function Restaurant(name, img, googleId, googleRating, googleReviews, yelpId, yelpRating, yelpReviews) {
+function Restaurant(name, img, googleId, googleRating, googleReviews, yelpId, yelpRating, yelpReviews, location) {
     this.name = name,
     this.img = img,
     this.googleId = googleId,
@@ -9,7 +9,8 @@ function Restaurant(name, img, googleId, googleRating, googleReviews, yelpId, ye
     this.googleReviews = googleReviews,
     this.yelpId = yelpId,
     this.yelpRating = yelpRating,
-    this.yelpReviews = yelpReviews
+    this.yelpReviews = yelpReviews,
+    this.location = location
 }
 
 // Search Restaurants by Type and Location => combine results from Google Place & Yelp
@@ -33,7 +34,8 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
                 g.review_count,
                 y.id,
                 y.rating,
-                y.review_count
+                y.review_count,
+                g.location? g.location : y.location
             ))
             // Remove from yelpResults
             yelpResult = yelpResult.filter( y => y.name !== g.name);
@@ -47,7 +49,8 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
                 g.review_count,
                 "No_ID",
                 null,
-                null
+                null,
+                g.location
             ))
         }
     })
@@ -62,7 +65,8 @@ const searchRestaurantsByTypeAndLocation = async(type, location) => {
             null,
             y.id,
             y.rating,
-            y.review_count
+            y.review_count,
+            y.location
         ))
     })
 

@@ -16,7 +16,10 @@ a:hover {
 }
 
 header {
-    background-color: #fff;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    background-color: #F2F2F2;
     border-bottom: 1px solid #ddd;
     position: fixed;
     top: 0;
@@ -25,6 +28,11 @@ header {
     width: 100%;
     z-index: 1;
 }
+
+header h2 {
+    margin: 0;
+}
+
 
 #main {
     margin-top: 50px;
@@ -56,17 +64,17 @@ header {
 #hero-text {
     width: 100%;
     text-align: center;
-    color: #0b132b;
-    font-size: 5em;
+    color: #8e5208;
+    font-size: 3.5em;
     margin-top: 0;
 }
 
 #search-bar {
     width: 80%;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     display: flex;
     flex-flow: row wrap;
-    gap: 2px;
+    gap: 1%;
 }
 
 #search-type,
@@ -82,7 +90,7 @@ header {
 }
 
 #search-location {
-    width: 25%;
+    width: 30%;
 }
 
 #search-button {
@@ -102,6 +110,7 @@ header {
 
 #featured-list h2 {
     margin-left: 2%;
+    color: darkorange;
 }
 
 #restaurants-container {
@@ -143,6 +152,10 @@ header {
     text-align: center;
 }
 
+.featured-restaurant h3 {
+    color: orange;
+}
+
 /* Search Result */
 
 #search-result-wrapper {
@@ -152,6 +165,10 @@ header {
     margin: 0 0 0 2%;
 }
 
+#search-result-wrapper h1 {
+    color: darkorange;
+}
+
 #search-result {
     margin: 0 0 0 2%;
     display: flex;
@@ -159,7 +176,7 @@ header {
 }
 
 .search-result-restaurant {
-    background-color: #fff;
+    background: linear-gradient(45deg , #ddf1fe, #f3fafe);
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
@@ -176,39 +193,79 @@ header {
     max-height: 200px;
 }
 
+.search-details {
+    width: 60%;
+}
+
 .search-result-restaurant h3, .search-result-restaurant p {
     margin-left: 10%;
     color: black;
 }
 
+.search-result-restaurant h3 {
+    color: orange;
+}
 /* Restaurant */
 
 #restaurant {
-    margin-left: 2%;
+    padding: 0 2%;
+    background: linear-gradient(45deg , #ddf1fe, #f3fafe);
 }
 
 #restaurant h1 {
     padding-top: 10px;
+    color: darkorange;
 }
 
 #res-info {
     display: flex;
     flex-flow: row wrap; 
     gap: 5%;
+        
+}
+
+.res-image {
+    width: 30%;
+    max-width: 30%;
 }
 
 #res-detail {
     display: flex;
     flex-flow: column nowrap;
-}
-
-#res-review > * {
-    background-color: #fff;
-    border: 1px solid #ccc;
+    width: 60%;
+    background: white;
+    border: 5px dashed #ccc;
     border-radius: 4px;
     box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
 }
 
-#res-review h3, #res-review p {
+#res-detail > * {
+    margin-left: 2%;
+}
+
+#res-review h2 {
+    color: orange;
+}
+
+.google-review {
+    background-color: #ffffea;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
+    padding: 0 2%;
+}
+
+.yelp-review {
+    background-color: #ffecef;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.15);
+    padding: 0 2%;
+}
+
+
+/* Footer */
+
+footer {
     margin-left: 2%;
 }
